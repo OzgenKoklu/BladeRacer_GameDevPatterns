@@ -10,24 +10,24 @@ Or buy a hard copy of the book here: https://www.amazon.com/Game-Development-Pat
 
 # Design Patterns and techniques covered so far
 
-- **Singleton** , for game manager. Related scripts: Singleton.cs, gameManager.cs (Scene: Init)
+# **1) Singleton** 
+- For game manager. Related scripts: Singleton.cs, gameManager.cs (Scene: Init)
 
 Singleton is used to be sure that there's only one instance of gameManager across the scenes, throughout the game session, in this case, it keeps track of playtime and other game metrics.
 
-Benefits: Globally Accesible, Control Concurrency - Drawbacks: Unit Testing, Laziness
+**Benefits:** Globally Accesible, Control Concurrency - Drawbacks: Unit Testing, Laziness
 
-- **State Pattern** , for player character (state) control. Related scripts: IBikeState.cs, ClientState.cs, BikeController.cs, BikeStopState.cs, BikeStartState.cs, BikeTurnState.cs, Direction.cs (Scene: test1)
+# **2) State Pattern** 
+- For player character (state) control. Related scripts: IBikeState.cs, ClientState.cs, BikeController.cs, BikeStopState.cs, BikeStartState.cs, BikeTurnState.cs, Direction.cs (Scene: test1)
 
 The state pattern is utilized to avoid spaghetti code on the character controller, where dozens of boolean values define the possibility of each state, such as isGameActive, isGrounded, isAttacking, isCrouched, isDamagedandFelldown, isPoisoned, superAttackReady, isReadyToAttack and much much more. State pattern simplifies things by encapsulating the expected finite behaviors of a character. For this game, its motorcycles states are STOP, START, TURN, CRASH. 
 
 About this implementation, from the book, (page 60): 
 
 *"Here's a shortlist of potential limitations:
-
 Blending: In its native form, the State pattern doesn't offer a solution to blend
 animations. This limitation can become an issue when you want to achieve a
 smooth visual transition between the animated states of a character.
-
 Transitioning: In our implementation of the pattern, we can easily switch
 between states, but we are not defining the relation between them. Therefore, if
 we wish to define transitions between states based on relationships and
@@ -38,10 +38,11 @@ depending on a trigger or condition. This could be time-consuming to do in code.
 
 Book also mentions these shortcomings can be overcome by implementing the state pattern onto Unity's animation trees. 
 
-Benefits: Encapsulation, Maintinence - Drawbacks: blending and transition of states
+**Benefits:** Encapsulation, Maintinence - Drawbacks: blending and transition of states
 
-Alternative solutions according to the book: Blackboard/behaviour threes, FSM, Memento
-- **Event Bus** , publishers, subscribers and the event bus. Related Scripts: RaceEventType.cs, RaceEventBus.cs, CountdownTimer.cs, bikeController.cs, HUDController.cs (Scene: test1 2)
+**Alternative solutions according to the book:** Blackboard/behaviour threes, FSM, Memento
+# **3) Event Bus** 
+- Publishers, subscribers and the event bus. Related Scripts: RaceEventType.cs, RaceEventBus.cs, CountdownTimer.cs, bikeController.cs, HUDController.cs (Scene: test1 2)
 
 In the event bus method, there are gameObjects that are publishers and/or subscribers, publishers send messages to subscribers to trigger state changes. (using events, delegates, actions in c#) Similar to Observer method.  Event bus script takes the role as a middleman between publishers and subscribers.
 
@@ -60,6 +61,8 @@ my opinion, is the Event Bus."*
 
 Racing game stages: Countdown, Race start, race finish - State Changers: Race Pause, Race quit, race stop - Components thata get effected from state changes: Hud, race timer, bike controller, input recorder
 
-Alternative solutions according to the book: Observer, Event Queue, ScriptableObjects
-Benefits: Decoupling, Simplicity - Drawbacks: Performance, Global 
+**Benefits:** Decoupling, Simplicity - Drawbacks: Performance, Global 
+
+**Alternative solutions according to the book:** Observer, Event Queue, ScriptableObjects
+
 
