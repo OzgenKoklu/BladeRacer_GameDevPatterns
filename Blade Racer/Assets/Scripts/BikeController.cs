@@ -7,6 +7,25 @@ public class BikeController : MonoBehaviour
     public float maxSpeed = 2.0f;
     public float turnDistance = 2.0f;
     public float CurrentSpeed { get; set; }
+
+    private string _status;
+
+    void OnEnable()
+    {
+        RaceEventBus.Subscribe(
+        RaceEventType.START, StartBike);
+        RaceEventBus.Subscribe(
+        RaceEventType.STOP, StopBike);
+    }
+
+    void OnDisable()
+    {
+        RaceEventBus.Unsubscribe(
+        RaceEventType.START, StartBike);
+        RaceEventBus.Unsubscribe(
+        RaceEventType.STOP, StopBike);
+    }
+
     public Direction CurrentTurnDirection
     {
         get; private set;
@@ -26,17 +45,36 @@ new BikeStateContext(this);
         gameObject.AddComponent<BikeTurnState>();
         _bikeStateContext.Transition(_stopState);
     }
-    public void StartBike()
+
+    private void StartBike()
+    {
+        _status = "Started";
+    }
+    private void StopBike()
+    {
+        _status = "Stopped";
+    }
+
+    /*public void StartBike()
     {
         _bikeStateContext.Transition(_startState);
     }
     public void StopBike()
     {
         _bikeStateContext.Transition(_stopState);
-    }
+    } From the state pattern chapter */
+
     public void Turn(Direction direction)
     {
         CurrentTurnDirection = direction;
         _bikeStateContext.Transition(_turnState);
+    }
+
+    void OnGUI()
+    {
+        GUI.color = Color.green;
+        GUI.Label(
+        new Rect(10, 60, 200, 20),
+        "BIKE STATUS: " + _status);
     }
 }

@@ -11,7 +11,7 @@ public class ClientState : MonoBehaviour
         (BikeController)
         FindObjectOfType(typeof(BikeController));
     }
-    void OnGUI()
+   /* void OnGUI()
     {
         if (GUILayout.Button("Start Bike"))
             _bikeController.StartBike();
@@ -21,5 +21,5 @@ public class ClientState : MonoBehaviour
             _bikeController.Turn(Direction.Right);
         if (GUILayout.Button("Stop Bike"))
             _bikeController.StopBike();
-    }
+    }from the state pattern chapter */
 }
