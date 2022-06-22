@@ -65,4 +65,11 @@ Racing game stages: Countdown, Race start, race finish - State Changers: Race Pa
 
 **Alternative solutions according to the book:** Observer, Event Queue, ScriptableObjects
 
+# **4) Command Pattern** 
+- For ghost replay systems(racing games), undo systems, macro (multiple button recording for shortcut purposes), automation (control automation). A scalable and modular way to record input data. Related Scripts: 
+
+In a behavioral pattern, closest cousins are Memento, observer, and visitor. (related to how objects communicate with each other)
+Class types in command pattern: Invoker; Object that knows how to execute a command and can also do the bookkeeping of executed commands. CommandBase; an abstract class to be inherited by the concreate command, is an execute method by itself. Receiver; Object that receives and executes the orders. ConcreteCommand; Client; 
+
+**Benefits:** Decoupling, Sequencing - Drawbacks: Complexity.
 
